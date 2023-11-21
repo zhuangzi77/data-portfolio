@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      code {
+        background-color: #eeeeee;
+        font-size: 20px;
+      }
+
+      header {
+        font-size: 28px;
+        background-color: #ddddff;
+      }
+
+      p {
+        font-size: 20px;
+      }
+
+      .main-section {
+        padding-top: 28px;
+      }
+
+     @media (max-width: 480px) {
+      code {
+        background-color: #eeeeee;
+        font-size: 14px;
+      }
+
+      header {
+        font-size: 20px;
+        background-color: #ddddff;
+      }
+
+      p {
+        font-size: 14px;
+      }
+
+      .main-section {
+        padding-top: 20px;
+      }
+     } 
+
+    </style>
+  </head>
+<main id="main-doc">
+  <nav id="navbar">
+    <header>
+      Regexes for Working with Chinese Text
+    </header>
+    <a class="nav-link" href="#Regex_Basics">Regex Basics</a>
+    <a class="nav-link" href="#Chinese_Character_Class">Chinese Character Class</a>
+    <a class="nav-link" href="#Variants">Variants</a>
+    <a class="nav-link" href="#Names_and_Dates">Names and Dates</a>
+    <a class="nav-link" href="#Pairs_of_Terms">Pairs of Terms</a>
+    <a class="nav-link" href="#Additional_Resources">Additional Resources</a>
+  </nav>
+
+  <section class="main-section" id="Regex_Basics">
+    <header>Regex Basics</header>
+  <p>Suppose you wanted to look for the name 'Zhuangzi' in a text using the find and replace window.  That's simple enough.  You just type the name: </p>
+  <code>Zhuangzi</code> 
+  <p> Now suppose you wanted to look for Zhuangzi, Kongzi, and Huizi in a text.  The easiest way to use the | (read "or") operator.</p>
+  <code>Zhuangzi|Kongzi|Huizi</code><br>
+<p>Or if you're searching in Chinese...</p>
+  <code>莊子|孔子|惠子</code>
+  <p>Since all three names have the same suffix, there are more economic ways of searching.  First, you can use parentheses with the | operator to create a group of text.</p>
+    <code>(Zhuang|Kong|Hui)zi</code>
+  <p>If you are working in Chinese, you can also define a group of characters to search for using square brackets.</p>
+    <code>[莊|孔|惠]子</code>
+  <p>You can also define a character class that include a range of letters.  The following includes all capital letters in English: </p>
+    <code>[A-Z]</code>
+  <p>This can be useful for searching for things like capitalized words.  The following code searches for capitalized words by searching exactly one capitial letter followed by some lower case letters. The + operator (read: plus) specifies that you want one or more of the second character class: </P>
+    <code>[A-Z][a-z]+</code>
+  <p>You could be more specific is you like, specifying that you want, exactly three of the lower case characters in curly brackets: </p>
+    <code>[A-Z][a-z]{3}</code>
+  <p>You can even give a range, if you want, for example between 2 and 10 of the lower case characters: </p>
+    <code>[A-Z][a-z]{2, 10}</code>
+  <p>If you want to select the full paragraphs in which Zhuangzi, Kongzi, or Huizi appear, a useful combination to keep in mind is .* (read: dot star).  The . designates a special character class that includes all characters except for new lines, while * indicates that zero or more instances of the preceeding character class.</p>
+  <p>This code will select any paragraph with Zhuangzi, Kongzi, or Huizi</p>
+    <code>.*[莊|孔|惠]子.*</code><br>
+  <p>If you are working in English, you'll need to use groups, rather than character classes</p>
+    <code>.*(Zhuang|Kong|Hui)zi.*</code>
+  <p>Of course, groups will also work with Chinese...</p>
+    <code>.*(莊|孔|惠)子.*</code>
+  <p>Next we'll see a few specific use cases for working with Chinese texts...</p>
+
+  </section>
+  <section class="main-section" id="Chinese_Character_Class">
+    <header>Chinese Character Class</header>
+      <p>You can select all of the Chinese text in a document by defining a special character class, just as we did with the ranges of capital and lower case letters.  In this case we specify the first through last Chinese characters in unicode: </p>
+      <code>[\u4E00-\u9FA5]</code>
+    <p>The above code captures Hanzi, but not punctuation.  To select all of the Chinese passages in a paper written in a Western language, a more complex regex is needed.  Just add the punctuation inside the brackets to include them in your character class: </p>
+      <code>[\u4E00-\u9FA5。「」, ﹁﹂  "" 『 』  「 」 、·  《》〈〉 ﹏﹏﹏ …… — ～ __ ，；]</code>
+  </section>
+
+  <section class="main-section" id="Variants">
+    <header>Variants</header>
+      <p>It's easy to search for variants using regexes.  You can conduct a simple variant search using the | operator.  In various recensions of the <i>Daodejing</i> the character <i>yuan</i> 元 is substituted for the character <i>xuan</i> 玄 due to a taboo against writing characters included in the personal name of an emperor.  This code will search for both: </p>
+      <code>玄|元</code>
+    <p>To search for multiple characters substituted for one or more characters, use parentheses to define a group.  This is a handy way to search for people known by multiple names, such as the poet and statesman Su Shi 蘇軾 (1037-1101), aka Su Dongpo 蘇東坡.</p>
+      <code>蘇(軾|東坡)</code>
+    <p>Or if you're searching in Roman characters...</p>
+      <code>Su (Shi|Dongpo)</code>
+    <p>You can also search for a phrase with one character designated as a variant by the . character class.  The "Webbed Toes" chapter of the <i>Zhuangzi</i> contains the lines "Though mallards' necks are short, extending them gives cause for worry, and though swans' necks are long, breaking them gives cause for sorrow" 鳧脛雖短，續之則憂；鶴脛雖長，斷之則悲.  Variant characters exist for both types of ducks, and it would not be surprising to see a wholly different species appear in a quotation of these lines.  We might therefore substitute the characters for the ducks with the . character class.</p>
+    <code>.脛雖短，續之則憂；.脛雖長，斷之則悲</code><br>    
+
+  </section>
+ 
+  <section class="main-section" id="Names_and_Dates">
+    <header>Names and Dates</header>
+      <p>It is a standard practice to give characters and dates the first time a historical figure appears in scholarly writing.  If you are working on a long article, a dissertation, or a book, these can become difficult to keep in order.  The following regex search for a 2-4 Chinese characters, followed by 2 capitalized words in Roman characters, followed dates in parentheses.  Note that the \ character appears before the starting and ending parentheses to indicate that we are literally searching for parentheses rather than indicating a group.  By contrast, \d indicates a character class consisting in the digits 1-9.  The following regex can be used to select text formatted like Su Shi 蘇軾 (1037-1101):</p>
+      <code>[A-Z][a-z]+ [A-Z][a-z]+ [\u4E00-\u9FA5]{2,4} \(\d{1,4}-\d{1,4}\)</code><br>
+    <p>A slightly more complex format can be used for the date to account for potential variations, such only beginning the date with text such as <i>c.a</i>, <i>r.</i>, or <i>jinshi</i>, or to account for only a single year appearing: </p>
+      <code>[A-Z][a-z]+ [A-Z][a-z]+ [\u4E00-\u9FA5]{2,4} \(.{0,10}\d{1,4}.{0,10}-{0,1}\d{0,4}.{0,4}\)</code><br> 
+  </section>
+  
+  <section class="main-section" id="Pairs_of_Terms">
+    <header>Pairs of Terms</header>
+      <p>Pairs of terms are easy to find separating them with the . character class.  You can select every paragraph in a text that has Zhuangzi 莊子 followed by Huizi 惠子 with the following code: </p>
+        <code>.*莊子.*惠子.*</code>
+      <p>To find Huizi followed by Zhuangzi, reverse the order: </p>
+        <code>.*惠子.*莊子.*</code><br>
+      <p>You can also specify a minimum and maximum number of intervening characters.  This code searches for Zhuangzi, followed by Huizi, after 0 to 20 characters: </p>
+        <code>.*莊子.{0,20}惠子.*</code>
+  </section>
+
+  <section class="main-section" id="Additional_Resources">
+    <header>Additional Resources</header>
+      <ul>
+        <li><a href="https://ctext.org/digital-humanities" target=blank>Digital Humanities page at the Chinese Text Project</a></li>
+        <li><a href="https://fairbank.fas.harvard.edu/research/research-initiatives/digital-china/">Digital China-Fairbank Center for Chinese Studies</a></li>
+        <li><a href="http://www.unicode.org/reports/tr38/tr38-20.html">Unicode Han Database (Unihan)</a></li>
+        <li><a href="https://www.w3big.com/python/python-chinese-encoding.html">Python Coding Chinese</a></li>
+        <li><a href="https://developpaper.com/regular-expressions-match-both-chinese-and-english-as-well-as-common-regular-expressions/">Page of Regexes for Chinese and English by Develop Paper</a></li>
+      </ul>
+          
+
+</main>
+</html>
