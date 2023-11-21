@@ -1,0 +1,27 @@
+p {
+	color: DarkSlateGray;
+}
+
+a {
+	color: Navy;
+	font-family: arial, helvetica, sans-serif;
+}
+
+h2 {
+	color: GhostWhite;
+	background-color: DarkSlateBlue;
+	font-family: lucida, arial, sans-serif;
+}
+
+h3 {
+	font-family: arial;
+	color: GhostWhite;
+	background-color: SeaGreen;
+	
+}
+
+body {
+	font-size: 14px;
+	color: RoyalBlue;
+	background-color: GhostWhite;
+}
