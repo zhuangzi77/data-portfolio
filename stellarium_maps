@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mapping in Stellarium</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h2>Mapping of Celestial Journeys in the Poems of Zhang Heng and Wang Yi</h2>
+  <h3>Zhang Heng's Celestial Journey</h3>
+    <p>I leave the solemn majesty of the Purple Palace,<br>
+And arrive at the towering heights of Taiwei.<br>
+I command Wang Liang to spur on the Quadriga;<br>
+We cross the Towering Pavillion towering on high.<br>
+I deploy the Net Carriage, its mesh broadly spread,<br>
+And hunt the vast expanse of Blue Grove.<br>
+Drawing the Majestic Bow, bending it full,<br>
+I shoot the giant Great Wolf.<br>
+I inspect the Ramparts at Northern Village,<br>
+Beat the rumbling River Drum.<br>
+Riding the surging swell of Fords of Heaven,<br>
+I float the fluvial flow of Han in the Clouds.<br>
+Leaning on the Twinkler and Conductors, I whirl and turn,<br>
+And perceive the continuous coursing of Two Norms and Five Wefts...<br>
+Translation modified from David R. Knechtges trans. "Contemplating the Mystery," in <i>Wen Xuan</i> of <i>Selections of Refined Liteature>, vol. 3, Princeton University Press: 1995, pp. 133-35. 
+
+    <img alt="B&W star map with stars and constellations named in Zhang Heng's poem" src="https://github.com/zhuangzi77/data-portfolio/ZhangHeng_Map_img.png/DigitalHumanities" />
+  
+   <h3>Wang Yi's Journey</h3>
+     <p>I approach Fu Yue, riding upon a dragon,<br>
+Meet the Weaver Maiden and take her as my bride.<br>
+I raise the Net of Heaven and capture the wayward,<br>
+Draw the Bow of Heaven and shoot the treacherous.<br>
+I follow the true men and soar up high,<br>
+Consuming primordial qi, long I endure.<br>
+I look upon Grand Tenuity so very solemn,<br>
+And peer at the brilliance of the Three Stairways.....<br>
+--Translation is my own.</p>
+
+     <img alt="B&W star map with stars and and constellation named in Wang Yi's poem." scr="https://github.com/zhuangzi77/data-portfolio/WangYi_Map_img.png/DigitalHumanities" />
+</body>
+</html>
